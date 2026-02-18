@@ -225,9 +225,9 @@ var FileLoader = {
 var EngineLoader = {
     arc_sha1: "",
     wasm_sha1: "",
-    wasm_size: 2525713,
+    wasm_size: 2580992,
     wasmjs_sha1: "",
-    wasmjs_size: 273436,
+    wasmjs_size: 273993,
     wasm_pthread_sha1: "",
     wasm_pthread_size: 2000000,
     wasmjs_pthread_sha1: "",
@@ -296,8 +296,9 @@ var EngineLoader = {
                         const error = new Error("Unexpected wasm sha1: " + sha1 + ", expected: " + EngineLoader.getWasmSha1());
                         if (typeof CUSTOM_PARAMETERS["start_error"] === "function") {
                            CUSTOM_PARAMETERS["start_error"](error);
+                        } else {
+                            throw error;
                         }
-                        throw error;
                     }
                 }
                 var wasmInstantiate = WebAssembly.instantiate(new Uint8Array(wasm), imports).then(function(output) {
@@ -307,8 +308,9 @@ var EngineLoader = {
                     console.log('wasm instantiation failed! ' + e);
                     if (typeof CUSTOM_PARAMETERS["start_error"] === "function") {
                         CUSTOM_PARAMETERS["start_error"](e);
+                    } else {
+                        throw e;
                     }
-                    throw e;
                 });
             },
             function(loadedDelta, currentAttempt){
@@ -697,7 +699,11 @@ var GameArchiveLoader = {
                 this.onFileLoaded(file);
             }).catch((e) => {
                 console.log('file verification failed! ' + e);
-                throw e;
+                if (typeof CUSTOM_PARAMETERS["start_error"] === "function") {
+                   CUSTOM_PARAMETERS["start_error"](e);
+                } else {
+                   throw e;
+                }
             });
         }
         // continue loading more pieces of the file
@@ -891,8 +897,8 @@ var Progress = {
 /* ********************************************************************* */
 
 var Module = {
-    engineVersion: "1.11.0",
-    engineSdkSha1: "7c81792859a6da7f7401c0ac37a4cc83bb500ff6",
+    engineVersion: "1.12.1",
+    engineSdkSha1: "16c6fd602f32de4814660672c38ce3ccbbc1fb59",
     noInitialRun: true,
 
     _filesToPreload: [],

@@ -1,11 +1,10 @@
-[]
-
 [project]
 title = La Saint-Valentin
 version = 
 publisher = 
 developer = 
 write_log = 0
+write_log_file = 0
 minimum_log_level = 1
 compress_archive = 1
 title_as_file_name = LaSaintValentin
@@ -122,6 +121,7 @@ max_count = 64
 max_animation_count = 1024
 max_particle_count = 1024
 max_particlefx_count = 64
+safe_area_mode = none
 
 [collection]
 max_instances = 1024
@@ -150,7 +150,7 @@ localizations = en
 [android]
 version_code = 1
 minimum_sdk_version = 19
-target_sdk_version = 35
+target_sdk_version = 36
 package = com.example.todo
 gcm_sender_id = 
 fcm_application_id = 
@@ -185,7 +185,7 @@ engine_arguments = --verify-graphics-calls=false
 wasm_streaming = 0
 show_fullscreen_button = 1
 show_made_with_defold = 0
-show_console_banner = 1
+show_console_banner = 0
 scale_mode = fit
 transparent_graphics_context = 0
 
@@ -203,6 +203,7 @@ http_cache_enabled = 1
 
 [library]
 include_dirs = 
+defold_min_version = 
 
 [script]
 shared_state = 1
